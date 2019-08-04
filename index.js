@@ -9,7 +9,8 @@ module.exports = babelPlugin;
 
 module.exports.createTranslation = (dict, options) => {
   const i18n = (options && options.i18n) || globalI18n;
-  const namespace = hash(dict, { algorithm: "md5", encoding: "base64" }).substr(0, 5);
+  const namespace =
+    (options && options.namespace) || hash(dict, { algorithm: "md5", encoding: "base64", excludeValues: false });
   const translations = utils.convertToLanguageFirst(dict);
   Object.keys(translations).forEach(lng => i18n.addResourceBundle(lng, namespace, translations[lng]));
   return {

@@ -1,5 +1,15 @@
 # i18next
 
+```json
+// .babelrc
+{
+  "plugins": [
+    "module:@choffmeister/i18next"
+  ]
+}
+
+```
+
 ```js
 // init.ts
 import * as i18next from 'i18next'
@@ -29,7 +39,9 @@ i18next
       }
     }
   )
+```
 
+```js
 // Greeting.ts
 import * as React from 'react'
 import { createTranslation } from '@choffmeister/i18next'

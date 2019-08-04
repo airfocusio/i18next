@@ -4,5 +4,5 @@ const path = require("path");
 
 pluginTester({
   plugin,
-  fixtures: path.join(__dirname, "babelPlugin")
+  fixtures: path.join(__dirname, "babelPluginFixtures")
 });
