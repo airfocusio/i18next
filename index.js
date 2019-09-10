@@ -1,28 +1,32 @@
-const babelPlugin = require("./src/babelPlugin");
-const utils = require("./src/utils");
-const hash = require("object-hash");
-const reactI18next = require("react-i18next");
+var babelPlugin = require("./src/babelPlugin");
+var utils = require("./src/utils");
+var hash = require("object-hash");
+var reactI18next = require("react-i18next");
 
-let globalI18n;
+var globalI18n;
 
 module.exports = babelPlugin;
 
-module.exports.createTranslation = (dict, options) => {
-  const i18n = (options && options.i18n) || globalI18n;
-  const namespace =
+module.exports.createTranslation = function(dict, options) {
+  var i18n = (options && options.i18n) || globalI18n;
+  var namespace =
     (options && options.namespace) || hash(dict, { algorithm: "md5", encoding: "base64", excludeValues: false });
-  const translations = utils.convertToLanguageFirst(dict);
-  Object.keys(translations).forEach(lng => i18n.addResourceBundle(lng, namespace, translations[lng]));
+  var translations = utils.convertToLanguageFirst(dict);
+  Object.keys(translations).forEach(function(lng) {
+    i18n.addResourceBundle(lng, namespace, translations[lng]);
+  });
   return {
     namespace,
     translations,
-    useTranslation: () => reactI18next.useTranslation(namespace, { i18n })
+    useTranslation: function() {
+      return reactI18next.useTranslation(namespace, { i18n });
+    }
   };
 };
 
 module.exports.init = {
   type: "3rdParty",
-  init: i18n => {
+  init: function(i18n) {
     globalI18n = i18n;
   }
 };
