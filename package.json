@@ -1,6 +1,6 @@
 {
   "name": "@choffmeister/i18next",
-  "version": "0.2.5",
+  "version": "0.3.0-alpha",
   "main": "index.js",
   "types": "index.d.ts",
   "license": "MIT",
