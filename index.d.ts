@@ -8,7 +8,7 @@ declare module '@choffmeister/i18next' {
   export function createTranslation(dict: any, opts?: CreateTranslationOpts): {
     namespace: string,
     translations: any,
-    useTranslation: () => UseTranslationResponse,
+    useTranslation: () => UseTranslationResponse<string>,
   }
   export const init: I18next.ThirdPartyModule
 }

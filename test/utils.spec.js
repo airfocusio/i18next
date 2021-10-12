@@ -5,42 +5,42 @@ it("a", () => {
     convertToLanguageFirst({
       first: {
         en: "en1",
-        de: "de1"
-      }
+        de: "de1",
+      },
     })
   ).toEqual({
     en: {
-      first: "en1"
+      first: "en1",
     },
     de: {
-      first: "de1"
-    }
+      first: "de1",
+    },
   });
   expect(
     convertToLanguageFirst({
       first: {
         second: {
           en: "en2",
-          de: "de2"
+          de: "de2",
         },
         third: {
           en: "en3",
-          de: "de3"
-        }
-      }
+          de: "de3",
+        },
+      },
     })
   ).toEqual({
     en: {
       first: {
         second: "en2",
-        third: "en3"
-      }
+        third: "en3",
+      },
     },
     de: {
       first: {
         second: "de2",
-        third: "de3"
-      }
-    }
+        third: "de3",
+      },
+    },
   });
 });

@@ -2,23 +2,23 @@ var assign = require("es6-object-assign").assign;
 
 function convertToLanguageFirst(translations) {
   return listToDeep(
-    deepToList(translations).map(function(item) {
+    deepToList(translations).map(function (item) {
       return assign({}, item, {
-        keys: item.keys.slice(item.keys.length - 1).concat(item.keys.slice(0, item.keys.length - 1))
+        keys: item.keys.slice(item.keys.length - 1).concat(item.keys.slice(0, item.keys.length - 1)),
       });
     })
   );
 }
 
 function deepToList(deep) {
-  return Object.keys(deep).reduce(function(acc, key) {
+  return Object.keys(deep).reduce(function (acc, key) {
     var value = deep[key];
     if (typeof value === "object") {
       var a = acc.concat(
-        deepToList(value).map(function(x) {
+        deepToList(value).map(function (x) {
           return {
             keys: [key].concat(x.keys),
-            value: x.value
+            value: x.value,
           };
         })
       );
@@ -30,7 +30,7 @@ function deepToList(deep) {
 }
 
 function listToDeep(list) {
-  var set = function(value, path) {
+  var set = function (value, path) {
     if (path.keys.length === 0) {
       return path.value;
     } else {
@@ -42,11 +42,11 @@ function listToDeep(list) {
       return value2;
     }
   };
-  return list.reduce(function(acc, item) {
+  return list.reduce(function (acc, item) {
     return set(acc, item);
   }, {});
 }
 
 module.exports = {
-  convertToLanguageFirst
+  convertToLanguageFirst,
 };

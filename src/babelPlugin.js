@@ -13,9 +13,9 @@ module.exports = function i18nextBabelPlugin(babel) {
             return;
           }
 
-          const imports = path.node.specifiers.map(s => ({
+          const imports = path.node.specifiers.map((s) => ({
             localName: s.local.name,
-            importedName: s.type === "ImportDefaultSpecifier" ? "default" : s.imported.name
+            importedName: s.type === "ImportDefaultSpecifier" ? "default" : s.imported.name,
           }));
 
           let shouldExit = false;
@@ -44,24 +44,24 @@ module.exports = function i18nextBabelPlugin(babel) {
            * See: https://github.com/kentcdodds/import-all.macro/issues/7
            */
           state.file.scope.path.traverse({
-            Identifier() {}
+            Identifier() {},
           });
 
           const createTranslationReferencePaths = referencePathsByImportName["createTranslation"] || [];
           createTranslationReferencePaths
-            .filter(ref => t.isCallExpression(ref.parent))
-            .filter(ref => ref.node === ref.parent.callee)
-            .filter(ref => ref.parent.arguments.length >= 1)
-            .forEach(reference => {
+            .filter((ref) => t.isCallExpression(ref.parent))
+            .filter((ref) => ref.node === ref.parent.callee)
+            .filter((ref) => ref.parent.arguments.length >= 1)
+            .forEach((reference) => {
               rewriteCreateTranslationCallExpression({
                 reference,
                 state,
-                babel
+                babel,
               });
             });
         }
-      }
-    }
+      },
+    },
   };
 };
 
