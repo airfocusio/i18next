@@ -12,9 +12,11 @@ module.exports.createTranslation = function (dict, options) {
   var namespace =
     (options && options.namespace) || hash(dict, { algorithm: "md5", encoding: "base64", excludeValues: false });
   var translations = utils.convertToLanguageFirst(dict);
-  Object.keys(translations).forEach(function (lng) {
-    i18n.addResourceBundle(lng, namespace, translations[lng]);
-  });
+  if (typeof i18n !== 'undefined') {
+    Object.keys(translations).forEach(function (lng) {
+      i18n.addResourceBundle(lng, namespace, translations[lng]);
+    });
+  }
   return {
     namespace,
     translations,
