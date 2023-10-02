@@ -13,7 +13,7 @@ function convertToLanguageFirst(translations) {
 function deepToList(deep) {
   return Object.keys(deep).reduce(function (acc, key) {
     var value = deep[key];
-    if (typeof value === "object") {
+    if (!!value && typeof value === "object") {
       var a = acc.concat(
         deepToList(value).map(function (x) {
           return {
